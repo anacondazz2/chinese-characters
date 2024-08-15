@@ -1,1 +1,1 @@
-# chinese-lookup-assistant
+# chinese-characters
