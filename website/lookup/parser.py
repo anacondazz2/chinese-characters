@@ -3,6 +3,7 @@
 # Written by Franki Allegra in February 2020. Adapted by Patrick Hu in July 2024.
 import os
 import json
+from .models import Word
 
 
 def parse_line(line):
@@ -43,14 +44,26 @@ def remove_surnames():
                 list_of_dicts.pop(x)
 
 
+def remove_variants():
+    for x in range(len(list_of_dicts)-1, -1, -1):
+        if len(list_of_dicts[x]['english']) == 1 and 'variant' in list_of_dicts[x]['english'][0]:
+            # print(list_of_dicts[x]['english'])
+            # Remove from db.
+            Word.objects.filter(
+                english=list_of_dicts[x]['english']).delete()
+            list_of_dicts.pop(x)
+
+
 def main():
     print("Parsing dictionary...")
     for line in dict_lines:
         parse_line(line)
     remove_surnames()
-    return list_of_dicts
+    remove_variants()
+    print("Done parsing.")
 
 
+# Driver.
 # Open CEDICT file.
 # Get the directory of the current script.
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -60,15 +73,22 @@ with open(file_path, 'r', encoding='utf-8') as file:
     text = file.read()
     lines = text.split('\n')
     dict_lines = list(lines)
-
 list_of_dicts = []
-parsed_dict = main()
+main()
+
+print("Saving to database (this may take a few minutes) . . .")
+for one_dict in list_of_dicts:
+    new_word = Word(traditional=one_dict["traditional"], simplified=one_dict["simplified"],
+                    english=one_dict["english"], pinyin=one_dict["pinyin"])
+    new_word.save()
+print("Done.")
 
 # Write to a JSON file.
 # Already ran.
-# file_path = os.path.join(script_dir, 'parsed_dict.json')
-# with open(file_path, 'w', encoding='utf-8') as file: # BE CAREFUL OF THE CWD NOT BEING SET PROPERLY
-#     json.dump(parsed_dict, file, ensure_ascii=False, indent=2)
+file_path = os.path.join(script_dir, 'parsed_dict.json')
+# BE CAREFUL OF THE CWD NOT BEING SET PROPERLY
+with open(file_path, 'w', encoding='utf-8') as file:
+    json.dump(parsed_dict, file, ensure_ascii=False, indent=2)
 
 # __name__ = "__main__":
 # when a module is being imported, its __name__ attribute will be set to the name of the module itself
@@ -76,3 +96,10 @@ parsed_dict = main()
 # So this idiom checks whether a module is being imported or run directly.
 
 # Each time a change is made to the Django's project files, the watcher detects and restarts the server automatically.
+
+
+# If you want to save to a database as JSON objects, create a class Word in the Models file of your Django project:
+# print("Saving to database (this may take a few minutes) . . .")
+# for one_dict in list_of_dicts:
+#     new_word = Word(traditional = one_dict["traditional"], simplified = one_dict["simplified"], english = one_dict["english"], pinyin = one_dict["pinyin"])
+#     new_word.save()

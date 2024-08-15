@@ -7,5 +7,5 @@ urlpatterns = [
     # On successful find, he view function is called with an httprequest object and additional provided args.
 
     path("", views.index, name="index"),
-    path("test", views.test, name="test")
+    path("print_dict", views.print_dict, name="print_dict"),
 ]

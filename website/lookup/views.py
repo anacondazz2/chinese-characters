@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Testing parser...
-from .parser import parsed_dict
+from .parser import list_of_dicts
 
 
 def index(request):
     return HttpResponse("Hello, world.")
 
 
-def test(request):
+def print_dict(request):
     # Test the output of the parser.
-    print(parsed_dict)
+    print(list_of_dicts)
     return HttpResponse("Testing...")
