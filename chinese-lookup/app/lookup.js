@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 function LookupApp() {
-  const [mInput, setMinput] = useState({});
+  const [input, setInput] = useState([]);
 
   const handleChange = (e) => {
-    console.log(1);
+    const query = e.target.value;
+    // axios post
   }
 
   return (

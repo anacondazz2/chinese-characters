@@ -74,21 +74,21 @@ with open(file_path, 'r', encoding='utf-8') as file:
     lines = text.split('\n')
     dict_lines = list(lines)
 list_of_dicts = []
-main()
+# main()
 
-print("Saving to database (this may take a few minutes) . . .")
-for one_dict in list_of_dicts:
-    new_word = Word(traditional=one_dict["traditional"], simplified=one_dict["simplified"],
-                    english=one_dict["english"], pinyin=one_dict["pinyin"])
-    new_word.save()
-print("Done.")
+# print("Saving to database (this may take a few minutes) . . .")
+# for one_dict in list_of_dicts:
+#     new_word = Word(traditional=one_dict["traditional"], simplified=one_dict["simplified"],
+#                     english=one_dict["english"], pinyin=one_dict["pinyin"])
+#     new_word.save()
+# print("Done.")
 
 # Write to a JSON file.
 # Already ran.
-file_path = os.path.join(script_dir, 'parsed_dict.json')
-# BE CAREFUL OF THE CWD NOT BEING SET PROPERLY
-with open(file_path, 'w', encoding='utf-8') as file:
-    json.dump(parsed_dict, file, ensure_ascii=False, indent=2)
+# file_path = os.path.join(script_dir, 'parsed_dict.json')
+# # BE CAREFUL OF THE CWD NOT BEING SET PROPERLY
+# with open(file_path, 'w', encoding='utf-8') as file:
+#     json.dump(list_of_dicts, file, ensure_ascii=False, indent=2)
 
 # __name__ = "__main__":
 # when a module is being imported, its __name__ attribute will be set to the name of the module itself

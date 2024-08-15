@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .parser import list_of_dicts
+from .parser import main
+from .models import Word
 
 
 def index(request):
@@ -9,5 +10,8 @@ def index(request):
 
 def print_dict(request):
     # Test the output of the parser.
-    print(list_of_dicts)
     return HttpResponse("Testing...")
+
+
+def lookup_entry(request):
+    query = request.GET.get('query', '')

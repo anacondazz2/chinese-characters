@@ -8,4 +8,5 @@ urlpatterns = [
 
     path("", views.index, name="index"),
     path("print_dict", views.print_dict, name="print_dict"),
+    path("lookup_entry", views.lookup_entry, name="lookup_entry"),
 ]
