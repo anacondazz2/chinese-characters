@@ -7,6 +7,6 @@ urlpatterns = [
     # On successful find, he view function is called with an httprequest object and additional provided args.
 
     path("", views.index, name="index"),
-    path("print_dict", views.print_dict, name="print_dict"),
-    path("lookup_entry", views.lookup_entry, name="lookup_entry"),
+    path("print-dict/", views.index, name="print_dict"),
+    path("api/lookup-entry/", views.lookup_entry, name="lookup_entry"),
 ]
