@@ -6,7 +6,6 @@ urlpatterns = [
     # When we want to go to a URL we send a GET request. We can also POST to a URL in our backend code.
     # On successful find, he view function is called with an httprequest object and additional provided args.
 
-    path("", views.index, name="index"),
-    path("print-dict/", views.index, name="print_dict"),
+    path("print-dict/", views.print_dict, name="print_dict"),
     path("api/lookup-entry/", views.lookup_entry, name="lookup_entry"),
 ]

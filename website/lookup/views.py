@@ -4,11 +4,6 @@ from rest_framework.response import Response
 from .models import Word
 from .serializers import WordSerializer
 
-
-def index(request):
-    return Response({})
-
-
 def print_dict(request):
     # Test the output of the parser.
     return Response({})
@@ -22,6 +17,7 @@ def lookup_entry(request):
         print(1)
         word_instances = Word.objects.filter(pinyin__icontains=query)
         if word_instances.exists():
+            print("s")
             serializer = WordSerializer(word_instances, many=True)
             return Response(serializer.data)
     else:

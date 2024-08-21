@@ -11,14 +11,18 @@ function LookupApp() {
 
     if (query) {
       // Make sure to make request to backend server.
-      axios.get(`http://127.0.0.1:8000/lookup/api/lookup-entry/?query=${encodeURIComponent(query)}`)
+      axios.get(`http://127.0.0.1:8000/api/lookup-entry/?query=${encodeURIComponent(query)}`)
         .then((response) => {
+          console.log("Lookup request successful.");
           setResult(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
           setResult({ error: 'Error retrieving data.' });
         });
+    } else {
+      setResult(null);
     }
   };
 
@@ -36,9 +40,13 @@ function LookupApp() {
           {result.error ? (
             <p>{result.error}</p>
           ) : (
-            <>
-              <p>English: {result.english}</p>
-            </>
+            <ul>
+              {result.map((entry, index) => (
+                <li key={index}>
+                  {entry.pinyin}
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       )}
