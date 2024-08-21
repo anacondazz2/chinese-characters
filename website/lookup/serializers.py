@@ -4,4 +4,4 @@ from .models import Word
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = ['pinyin']
+        fields = ['simplified', 'pinyin']

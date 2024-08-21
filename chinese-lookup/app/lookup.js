@@ -31,7 +31,6 @@ function LookupApp() {
     }
   }
 
-  // Effect to fetch results when query changes
   useEffect(() => {
     const id = setTimeout(() => {
       fetchResult();
