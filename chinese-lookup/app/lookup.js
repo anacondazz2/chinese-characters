@@ -20,6 +20,7 @@ function LookupApp() {
       axios.get(`http://127.0.0.1:8000/api/lookup-entry/?query=${encodeURIComponent(query)}`)
         .then((response) => {
           setResult(response.data);
+          console.log(response.data);
           setShowMore(false); // Reset showMore state on new query
         })
         .catch((error) => {
@@ -63,7 +64,7 @@ function LookupApp() {
           <ul>
             {displayResults.map((entry, index) => (
               <li key={index}>
-                {entry.pinyin}
+                {entry.pinyin}, {entry.simplified}, {entry.id}, {entry.english}
               </li>
             ))}
           </ul>
