@@ -15,10 +15,15 @@ def build_regex_pattern(query):
     parts = query.split()
     pattern = ''
     if len(parts) == 1:
-        pattern = r'^' + re.escape(parts[0]) + r'[1-5]?$'
+        pattern = r'^' + re.escape(parts[0]) + r'[a-zA-Z]*[1-5]?$'
     else:
-        pattern = r'^' + \
-            r'\s+'.join([f'{re.escape(part)}[1-5]?' for part in parts]) + r'$'
+        last = re.escape(parts[-1]) + r'[a-zA-Z]*[1-5]?$'
+        rest = r'^' + ' '.join(
+            [f'{re.escape(part)}[1-5]?' for part in parts[:-1]])
+        pattern = rest + ' ' + last
+        print(rest)
+        print(last)
+        print(pattern)
     return pattern
 
 

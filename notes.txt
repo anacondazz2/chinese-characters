@@ -1,0 +1,13 @@
+Do you need both package-lock.json and package.json? No.
+
+Do you need the package.json? Yes.
+
+Can you have a project with only the package-lock.json? No.
+
+The package.json is used for more than dependencies - like defining project properties, description, author & license information, scripts, etc. The package-lock.json is solely used to lock dependencies to a specific version number.
+
+regex patterns should be raw strings so that the backslashes are included. a\+b\* would be interpreted as literal sequence a+b* where + and * are not treated as special regex characters. Take r'^a\+b\*[a-zA-Z]*[1-5]?$'. The remaining parts like [1-5]? will be interpreted as proper regex.
+
+raw strings cancel the backslash escape functionality.
+
+confusing because n has no special meaning but \n has special meaning but in regex ? has special meaning while escaping it \? removes that meaning and turns it a literal ?.

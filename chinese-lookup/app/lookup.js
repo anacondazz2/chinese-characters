@@ -61,6 +61,7 @@ function LookupApp() {
       {result.length > 0 && (
         <div>
           <h3>Lookup Result:</h3>
+          <h3>{displayResults.length} Results found.</h3>
           <ul>
             {displayResults.map((entry, index) => (
               <li key={index}>
