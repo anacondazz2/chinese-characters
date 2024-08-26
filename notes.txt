@@ -11,3 +11,7 @@ regex patterns should be raw strings so that the backslashes are included. a\+b\
 raw strings cancel the backslash escape functionality.
 
 confusing because n has no special meaning but \n has special meaning but in regex ? has special meaning while escaping it \? removes that meaning and turns it a literal ?.
+
+json keys must be strings. python dict keys can be either string, number, or a tuple can be a key.
+
+* When importing from a python file, all top level code not in a function body will run.

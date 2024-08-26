@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import Word
 from .serializers import WordSerializer
 import re
+from .parser import parsed_dict
 
 
 def print_dict(request):

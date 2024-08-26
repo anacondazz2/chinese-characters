@@ -6,6 +6,9 @@ import json
 from .models import Word
 
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+
 def parse_line(line):
     # Sample entry.
     # 鼠標 鼠标 [shu3 biao1] /mouse (computing)/
@@ -46,7 +49,7 @@ def remove_surnames():
 
 def remove_variants():
     for x in range(len(list_of_dicts)-1, -1, -1):
-        if len(list_of_dicts[x]['english']) == 1 and 'variant' in list_of_dicts[x]['english'][0]:
+        if 'variant' in list_of_dicts[x]['english'][0]:
             # print(list_of_dicts[x]['english'])
             # Remove from db.
             Word.objects.filter(
@@ -54,46 +57,57 @@ def remove_variants():
             list_of_dicts.pop(x)
 
 
+def remove_dupes():
+    # Removes dupes from db.
+    for row in Word.objects.all().reverse():
+        if Word.objects.filter(simplified=row.simplified).count() > 1:
+            print(row.simplified + " was deleted")
+            row.delete()
+
+
 def main():
-    print("Parsing dictionary...")
     for line in dict_lines:
         parse_line(line)
     remove_surnames()
     remove_variants()
-    print("Done parsing.")
 
 
-# Driver.
-# Open CEDICT file.
-# Get the directory of the current script.
-script_dir = os.path.dirname(os.path.abspath(__file__))
-# Construct the full path to the file.
-file_path = os.path.join(script_dir, 'cedict_ts.u8')
-with open(file_path, 'r', encoding='utf-8') as file:
-    text = file.read()
-    lines = text.split('\n')
-    dict_lines = list(lines)
-list_of_dicts = []
+print("Loading JSON file.")
+path = os.path.join(script_dir, 'parsed_dict.json')
+with open(path, 'r') as f:
+    parsed_dict = json.load(f)
+print(parsed_dict[0])
+Word.objects.all().delete()
+
+
+# print("Parsing dictionary.")
+# path = os.path.join(script_dir, 'cedict_ts.u8')
+# with open(path, 'r', encoding='utf-8') as file:
+#     text = file.read()
+#     lines = text.split('\n')
+#     dict_lines = list(lines)
+# list_of_dicts = []
 # main()
-
-# print("Saving to database (this may take a few minutes) . . .")
-# for one_dict in list_of_dicts:
-#     new_word = Word(traditional=one_dict["traditional"], simplified=one_dict["simplified"],
-#                     english=one_dict["english"], pinyin=one_dict["pinyin"])
-#     new_word.save()
 # print("Done.")
 
-# Write to a JSON file.
-# Already ran.
-# file_path = os.path.join(script_dir, 'parsed_dict.json')
-# # BE CAREFUL OF THE CWD NOT BEING SET PROPERLY
-# with open(file_path, 'w', encoding='utf-8') as file:
+print("Saving to database (this may take a few minutes) . . .")
+for one_dict in parsed_dict:
+    new_word = Word(traditional=one_dict["traditional"], simplified=one_dict["simplified"],
+                    english=one_dict["english"], pinyin=one_dict["pinyin"])
+    new_word.save()
+print("Done.")
+
+# print("Writing to JSON file.")
+# path = os.path.join(script_dir, 'parsed_dict.json')
+# with open(path, 'w', encoding='utf-8') as file:
 #     json.dump(list_of_dicts, file, ensure_ascii=False, indent=2)
+# print("Done.")
 
 # __name__ = "__main__":
 # when a module is being imported, its __name__ attribute will be set to the name of the module itself
 # But when the module is being run directly as a script such as python module.py, then __name__ is set to "__main__"
 # So this idiom checks whether a module is being imported or run directly.
+
 
 # Each time a change is made to the Django's project files, the watcher detects and restarts the server automatically.
 
