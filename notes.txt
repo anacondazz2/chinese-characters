@@ -12,3 +12,26 @@ confusing because n has no special meaning but \n has special meaning but in reg
 json keys must be strings. python dict keys can be either string, number, or a tuple can be a key.
 
 * When importing from a python file, all top level code not in a function body will run.
+
+.filter in Django returns a QuerySet of each of the Word models. Serializer expects to take in a list of models with many=true arg.
+returned serializer.data will be the JSON.
+
+JSX elements are javscript objects.
+
+.map() returns a new array with a function applied to each element.
+const numbers = [65, 44, 12, 4];
+const newArr = numbers.map(myFunction) // [650, 440, 120, 40]
+function myFunction(num) {
+  return num * 10;
+}
+
+When you pass an array of <li> elements to a <ul>, React automatically handles it by rendering each <li> as a child of the <ul>.
+Which is why this works: <ul>
+                            {displayResults.map((entry, index) => (
+                            <li key={index}>
+                                {entry.simplified}  {entry.pinyin}
+                            </li>
+                            ))}
+                        </ul>
+
+strings as the body of JSX will intuitively be body text.

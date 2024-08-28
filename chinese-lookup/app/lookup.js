@@ -63,11 +63,14 @@ function LookupApp() {
           <h3>Lookup Result:</h3>
           <h3>{displayResults.length} Results found.</h3>
           <ul>
-            {displayResults.map((entry, index) => (
-              <li key={index}>
-                {entry.pinyin}, {entry.simplified}, {entry.id}, {entry.english}
-              </li>
-            ))}
+            {displayResults.map((entry, index) => {
+              const englishArray = JSON.parse(entry.english.replace(/'/g, '"'));
+              return (<li key={index}>
+                {entry.simplified}  {entry.pinyin}
+                <br />
+                {englishArray.map((en, idx) => `${idx + 1}. ${en}`).join(' ')}
+              </li>);
+            })}
           </ul>
           {!showMore && result.length > 50 && (
             <button onClick={handleShowMore}>
