@@ -1,6 +1,3 @@
-# Before starting, open the CEDICT text file and delete the copyright information at the top. Otherwise the program will try to parse it and you will get an error message.
-# Characters that are commonly used as surnames have two entries in CC-CEDICT. This program will remove the surname entry if there is another entry for the character. If you want to include the surnames, simply delete lines 59 and 60.
-# Written by Franki Allegra in February 2020. Adapted by Patrick Hu in July 2024.
 import os
 import json
 from .models import Word
