@@ -35,7 +35,7 @@ function LookupApp() {
   useEffect(() => {
     const id = setTimeout(() => {
       fetchResult();
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(id);
   }, [query]);
