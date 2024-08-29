@@ -20,7 +20,7 @@ function LookupApp() {
       axios.get(`http://127.0.0.1:8000/api/lookup-entry/?query=${encodeURIComponent(query)}`)
         .then((response) => {
           setResult(response.data);
-          console.log(response.data);
+          // console.log(response.data);
           setShowMore(false); // Reset showMore state on new query
         })
         .catch((error) => {
@@ -64,12 +64,27 @@ function LookupApp() {
           <h3>{displayResults.length} Results found.</h3>
           <ul>
             {displayResults.map((entry, index) => {
-              const englishArray = JSON.parse(entry.english.replace(/'/g, '"'));
-              return (<li key={index}>
-                {entry.simplified}  {entry.pinyin}
-                <br />
-                {englishArray.map((en, idx) => `${idx + 1}. ${en}`).join(' ')}
-              </li>);
+              let jsonString = entry.english.replace(/(?<=[:,\[])\s*'|'\s*(?=[:,\]])/g, '"');
+              jsonString = jsonString.replace(/;/g, '');
+              let englishArray;
+              try {
+                englishArray = JSON.parse(jsonString);
+                console.log(englishArray);
+              } catch (error) {
+                console.error("Failed to parse JSON:", error.message);
+                console.log("Problematic JSON string:", jsonString);
+              }
+              return (
+                <li key={index}>
+                  {entry.simplified} {entry.pinyin}
+                  <br />
+                  {englishArray.map((en, idx) => (
+                    <span key={idx}>
+                      <strong>{idx + 1}</strong> {en}{"   "}
+                    </span>
+                  ))}
+                </li>
+              );
             })}
           </ul>
           {!showMore && result.length > 50 && (

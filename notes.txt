@@ -16,7 +16,9 @@ json keys must be strings. python dict keys can be either string, number, or a t
 .filter in Django returns a QuerySet of each of the Word models. Serializer expects to take in a list of models with many=true arg.
 returned serializer.data will be the JSON.
 
-JSX elements are javscript objects.
+JSX elements are javascript objects.
+JSX are the html stuff in the js file.
+{} are used to go back to writing javascript within JSX.
 
 .map() returns a new array with a function applied to each element.
 const numbers = [65, 44, 12, 4];
@@ -35,3 +37,9 @@ Which is why this works: <ul>
                         </ul>
 
 strings as the body of JSX will intuitively be body text.
+
+.split() splits a string into an array of substrings.
+.join() joins an array of substrings into a big string.
+
+.replace() with a string pattern will only replace the first occurence.
+use \g flag to replace all occurences.
