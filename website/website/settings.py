@@ -46,6 +46,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # Replace with your frontend URL
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
