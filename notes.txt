@@ -43,3 +43,5 @@ strings as the body of JSX will intuitively be body text.
 
 .replace() with a string pattern will only replace the first occurence.
 use \g flag to replace all occurences.
+
+any files we include in the pages folder will be a new url route. the api folder is for backend url requests.
