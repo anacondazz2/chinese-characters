@@ -45,3 +45,10 @@ strings as the body of JSX will intuitively be body text.
 use \g flag to replace all occurences.
 
 any files we include in the pages folder will be a new url route. the api folder is for backend url requests.
+files that start with an underscore such as _document.js will not create a path.
+
+making an api handler using only js takes in both the req and res as arguments of the function.
+ex: res.status(200).send("login page")
+    res.write(# an entire login form's html)
+
+field values in a form are by defualt empty string.
