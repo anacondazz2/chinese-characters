@@ -52,3 +52,9 @@ ex: res.status(200).send("login page")
     res.write(# an entire login form's html)
 
 field values in a form are by defualt empty string.
+
+.get() in python to access a key's value in a dictionary is preferred over [] notation.
+
+lexical scope is the outer scope. It is usually the most immediate parent scope. obviously all inner scopes can access their outer scopes. 
+
+so a closure would be a function that retains access to variables from its LEXICAL scope, even after the outer function has finished executing.
