@@ -2,6 +2,7 @@ Do you need both package-lock.json and package.json? No.
 Do you need the package.json? Yes.
 Can you have a project with only the package-lock.json? No.
 The package.json is used for more than dependencies - like defining project properties, description, author & license information, scripts, etc. The package-lock.json is solely used to lock dependencies to a specific version number.
+package.json is the most important while package-lock is just for the version number.
 
 regex patterns should be raw strings so that the backslashes are included. a\+b\* would be interpreted as literal sequence a+b* where + and * are not treated as special regex characters. Take r'^a\+b\*[a-zA-Z]*[1-5]?$'. The remaining parts like [1-5]? will be interpreted as proper regex.
 
@@ -26,6 +27,7 @@ const newArr = numbers.map(myFunction) // [650, 440, 120, 40]
 function myFunction(num) {
   return num * 10;
 }
+while .forEach *modifies* the array.
 
 When you pass an array of <li> elements to a <ul>, React automatically handles it by rendering each <li> as a child of the <ul>.
 Which is why this works: <ul>
@@ -58,3 +60,8 @@ field values in a form are by defualt empty string.
 lexical scope is the outer scope. It is usually the most immediate parent scope. obviously all inner scopes can access their outer scopes. 
 
 so a closure would be a function that retains access to variables from its LEXICAL scope, even after the outer function has finished executing.
+
+const { page = 1, limit = 5, tags } = req.query;
+this grabs the page and limit properties. if they do not exist, defualt to 1 and 5 respectively.
+
+in python u can only use [] notation to access keys. in JS u can use both . notation and [] notation.
