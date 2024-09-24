@@ -65,3 +65,23 @@ const { page = 1, limit = 5, tags } = req.query;
 this grabs the page and limit properties. if they do not exist, defualt to 1 and 5 respectively.
 
 in python u can only use [] notation to access keys. in JS u can use both . notation and [] notation.
+
+analogy on javascript's non blocking behaviour:
+Imagine you’re a chef in a kitchen:
+You can only handle one task at a time (single-threaded).
+When you place a pot of water to boil (like an async task), you don’t just stand around waiting for it to boil (non-blocking).
+Instead, you move on to chopping vegetables, preparing ingredients, or other tasks while the water is boiling.
+Once the water boils (event occurs), you handle that task (e.g., add pasta) without skipping a beat, but you only do so after finishing whatever task you were already doing.
+
+consider this async function:
+async function getData() {
+  let data = await fetch("https://api.example.com/data");
+  console.log("Data fetched:", data);
+}
+getData();
+
+Without await, you would have to use .then() to get the result of fetch.
+With await, it makes it look like the function is waiting for the data synchronously, but behind the scenes, JavaScript keeps doing other things while fetch is being completed.
+
+
+
