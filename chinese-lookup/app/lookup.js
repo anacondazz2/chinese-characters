@@ -2,13 +2,32 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Debounce function to delay API calls
-const debounce = (func, delay) => {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => func(...args), delay);
-  };
-};
+// const debounce = (func, delay) => {
+//   let timer;
+//   return (...args) => {
+//     clearTimeout(timer);
+//     timer = setTimeout(() => func(...args), delay);
+//   };
+// };
+
+function parseEnglish(str) {
+  // convert the string representation of an array to an actual array
+  console.log(str);
+  let withoutBrackets = str.slice(1, -1);
+  let englishArray = withoutBrackets.split(/['"],\s/);
+  // remove the leading and trailing single quotes or double quotes if they exist
+  englishArray = englishArray.map((en) => {
+    if (en[0] === "'" || en[0] === '"') {
+      en = en.slice(1);
+    }
+    if (en[en.length - 1] === "'" || en[en.length - 1] === '"') {
+      en = en.slice(0, -1);
+    }
+    return en;
+  });
+  console.log(englishArray);
+  return englishArray;
+}
 
 function LookupApp() {
   const [query, setQuery] = useState('');
@@ -64,16 +83,7 @@ function LookupApp() {
           <h3>{displayResults.length} Results found.</h3>
           <ul>
             {displayResults.map((entry, index) => {
-              let jsonString = entry.english.replace(/(?<=[:,\[])\s*'|'\s*(?=[:,\]])/g, '"');
-              jsonString = jsonString.replace(/;/g, '');
-              let englishArray;
-              try {
-                englishArray = JSON.parse(jsonString);
-                console.log(englishArray);
-              } catch (error) {
-                console.error("Failed to parse JSON:", error.message);
-                console.log("Problematic JSON string:", jsonString);
-              }
+              let englishArray = parseEnglish(entry.english);
               return (
                 <li key={index}>
                   {entry.simplified} {entry.pinyin}
