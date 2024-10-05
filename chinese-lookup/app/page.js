@@ -2,14 +2,14 @@
 
 import React from 'react';
 import LookupApp from './components/LookupApp';
-import Link from 'next/link';
+import Navbar from './components/Navbar';
 
 export default function Home() {
   return (
     <div>
       <div>
         <LookupApp /> 
-        <Link href="/collection">Collection</Link>
+        <Navbar />
       </div>
     </div>
   );

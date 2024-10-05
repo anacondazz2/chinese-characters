@@ -20,7 +20,7 @@ function parseEnglish(str) {
   return englishArray;
 }
 
-function LookupApp() {
+export default function LookupApp() {
   const [query, setQuery] = useState('');
   const [result, setResult] = useState([]);
   const [showMore, setShowMore] = useState(false);
@@ -93,5 +93,3 @@ function LookupApp() {
     </div>
   );
 }
-
-export default LookupApp;
