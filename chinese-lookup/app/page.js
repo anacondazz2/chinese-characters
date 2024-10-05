@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import LookupApp from './lookup';
+import LookupApp from './components/LookupApp';
 import Link from 'next/link';
 
 export default function Home() {

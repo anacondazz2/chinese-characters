@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-// Debounce function to delay API calls
-// const debounce = (func, delay) => {
-//   let timer;
-//   return (...args) => {
-//     clearTimeout(timer);
-//     timer = setTimeout(() => func(...args), delay);
-//   };
-// };
+import { fetchLookupResults } from '../api/lookup';
 
 function parseEnglish(str) {
   // convert the string representation of an array to an actual array
@@ -34,22 +25,15 @@ function LookupApp() {
   const [result, setResult] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
-  const fetchResult = () => {
+  const fetchResult = async () => {
     if (query) {
-      axios.get(`http://127.0.0.1:8000/api/lookup-entry/?query=${encodeURIComponent(query)}`)
-        .then((response) => {
-          setResult(response.data);
-          // console.log(response.data);
-          setShowMore(false); // Reset showMore state on new query
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-          setResult([]);
-        });
+      const data = await fetchLookupResults(query);
+      setResult(data);
+      setShowMore(false);
     } else {
       setResult([]);
     }
-  }
+  };
 
   useEffect(() => {
     const id = setTimeout(() => {
