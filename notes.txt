@@ -83,5 +83,5 @@ getData();
 Without await, you would have to use .then() to get the result of fetch.
 With await, it makes it look like the function is waiting for the data synchronously, but behind the scenes, JavaScript keeps doing other things while fetch is being completed.
 
-
-
+To return an object in an arrow function, you need to wrap the object in parentheses to avoid confusion with the block syntax for a function body:
+const getObject = () => ({data: "success"});
