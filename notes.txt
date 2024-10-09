@@ -85,3 +85,5 @@ With await, it makes it look like the function is waiting for the data synchrono
 
 To return an object in an arrow function, you need to wrap the object in parentheses to avoid confusion with the block syntax for a function body:
 const getObject = () => ({data: "success"});
+
+Javascript payload is sent to client side components that need interactivity and dynamic changes. No JS payload is sent to server side components that only fetch data and are rendered completely on the server. Server side comps generate a static HTML file that does not change.
