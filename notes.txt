@@ -89,3 +89,6 @@ const getObject = () => ({data: "success"});
 Javascript payload is sent to client side components that need interactivity and dynamic changes. No JS payload is sent to server side components that only fetch data and are rendered completely on the server. Server side comps generate a static HTML file that does not change.
 
 When you run npm install, it installs the dependencies specified in the package.json file in the current directory.
+
+When a token is sent back to the server (lets say a user is logging back in), that token is valid if it was signed with the inital private key. 
+The token is sent through the HTTP request's header.
