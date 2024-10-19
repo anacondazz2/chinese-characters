@@ -92,3 +92,10 @@ When you run npm install, it installs the dependencies specified in the package.
 
 When a token is sent back to the server (lets say a user is logging back in), that token is valid if it was signed with the inital private key. 
 The token is sent through the HTTP request's header.
+Here is how JWT can be used in an authentication flow:
+
+1. A user provides their credentials (e.g., username and password) and sends them to the server.
+2. The server validates the credentials. If they are correct, the server generates a JWT containing the user's information (in a claim) and signs it with a secret key.
+3. The server sends the JWT back to the user.
+4. The user stores the JWT (usually in the browser's local storage or as a cookie) and includes it in the Authorization header in subsequent requests to the server. If you’re using Descope, you can change how the JWT is stored here, under Token Response Method.
+5. When the user sends a new request with the JWT, the server decodes the JWT, and verifies its signature. If the token is valid, the server processes the request and returns the appropriate response.
